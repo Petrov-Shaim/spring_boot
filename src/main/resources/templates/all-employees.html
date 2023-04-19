@@ -1,10 +1,10 @@
-<html xmlns:c="">
-<body>
+<!Doctype HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <h2>All Employees</h2>
 <br>
-
-<table>
+<style>table th, table td{padding: 5px}</style>
+<table border="1">
     <tr>
         <th>Name</th>
         <th>Surname</th>
@@ -12,35 +12,20 @@
         <th>Salary</th>
         <th>Operation</th>
     </tr>
-
-    <c:forEach var="emp" items="${allEmps}">
-
-        <c:url var="updateButton" value="/updateInfo">
-            <c:param name="empId" value="${emp.id}"/>
-        </c:url>
-        <c:url var="deleteButton" value="/deleteEmployee">
-            <c:param name="empId" value="${emp.id}"/>
-        </c:url>
-
-        <tr>
-            <td>${emp.name}</td>
-            <td>${emp.surname}</td>
-            <td>${emp.department}</td>
-            <td>${emp.salary}</td>
-            <td>
-                <input type="button" value="Update"
-                       onclick="window.location.href='${updateButton}'"/>
-
-                <input type="button" value="Delete"
-                       onclick="window.location.href='${deleteButton}'"/>
-            </td>
-        </tr>
-    </c:forEach>
+    <tr th:each="emp : ${allEmps}" >
+        <td th:utext="${emp.name}"></td>
+        <td th:utext="${emp.surname}"></td>
+        <td th:utext="${emp.department}"></td>
+        <td th:utext="${emp.salary}"></td>
+        <td>
+            <a th:href="@{'/updateInfo/' + ${emp.id}}"  th:text="Изменить"/>
+            <a th:href="@{'/deleteEmployee/' + ${emp.id}}"  th:text="Удалить"/>
+        </td>
+    </tr>
 </table>
 <br>
-<input type="button" value="Add"
+<input type="button" value="ADD NEW USER"
        onclick="window.location.href = 'addNewEmployee'"/>
-
 
 </body>
 </html>

@@ -1,24 +1,25 @@
-<html xmlns:form="http://www.w3.org/1999/xhtml">
+<!Doctype HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <body>
 
 <h2>Employees Info</h2>
 <br>
 
-<form:form action="saveEmployee" modelAttribute="employee">
-
-  <form:hidden path="id"/>
-
-  Name <form:input path="name"/>
-  <br><br>
-  Surname <form:input path="surname"/>
-  <br><br>
-  Department <form:input path="department"/>
-  <br><br>
-  Salary <form:input path="salary"/>
-  <br><br>
-  <input type="submit" value="OK">
-
-</form:form>
-
+<form th:action="@{/saveEmployee}" th:object="${employee}" method="post">
+    <input hidden th:field="*{id}">
+    <label>Name</label>
+    <input type="text" th:field="*{name}" id="name" placeholder="name">
+    <br><br>
+    <label>Surname</label>
+    <input type="text" th:field="*{surname}" id="surname" placeholder="surname">
+    <br><br>
+    <label>Department</label>
+    <input type="text" th:field="*{department}" id="department" placeholder="department">
+    <br><br>
+    <label>Salary</label>
+    <input type="text" th:field="*{salary}" id="salary" placeholder="salary">
+    <br><br>
+    <input type="submit" value="OK">
+</form>
 </body>
 </html>

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import petrov.springboot.spring_boot.entity.User;
@@ -42,16 +43,16 @@ public class MyController {
 
         return "redirect:/";
     }
-    @RequestMapping("/updateInfo")
-    public String updateEmployee(@RequestParam("empId") int id, Model model) {
+    @RequestMapping("/updateInfo/{id}")
+    public String updateEmployee(@PathVariable(value = "id") int id, Model model) {
 
         User employee = employeeService.getEmployee(id);
         model.addAttribute("employee", employee);
 
         return "employee-info";
     }
-    @RequestMapping("/deleteEmployee")
-    public String deleteEmployee(@RequestParam("empId") int id) {
+    @RequestMapping(value = "/deleteEmployee/{id}")
+    public String deleteEmployee(@PathVariable int id) {
         employeeService.deleteEmployee(id);
         return "redirect:/";
     }
